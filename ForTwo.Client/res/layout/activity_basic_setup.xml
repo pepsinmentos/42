@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.fortwo.client.BasicSetupActivity" >
+
+    <ScrollView
+        android:id="@+id/basic_setup_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout 
+            android:id="@+id/basic_setup_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+        <ImageView
+            android:id="@+id/select_profile_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/profile_pic"
+            android:src="@drawable/profile" />
+        
+        <EditText
+            android:id="@+id/mutual_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/mutual_password"
+            android:inputType="textPassword" />
+        
+        <Button
+            android:id="@+id/basic_setup_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:text="@string/ok"
+            />
+        
+        </LinearLayout>        
+        
+        
+    </ScrollView>
+   
+
+</RelativeLayout>

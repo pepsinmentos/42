@@ -28,9 +28,19 @@
      -->
 
         <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:background="@color/red"
+            android:padding="10dp"
+            android:text="TextView" />
+
+        <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/red"
             android:text="TextView" />
 
     </LinearLayout>
@@ -39,16 +49,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:gravity="bottom"
-        android:orientation="horizontal" >
+        android:background="@color/red"
+        android:orientation="horizontal" 
+        android:padding="5dp">
 
-        <Button
-            android:id="@+id/get_chat_button"
+        <EditText
+            android:id="@+id/chat_text_input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="9"            
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:background="@drawable/custom_rectangle" >
+
+            <requestFocus />
+        </EditText>
+        
+        <Button
+            android:id="@+id/chat_submit_button"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="@string/get_chats" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"     
+                   
+            >
+            
+        </Button>
+
     </LinearLayout>
 
 </LinearLayout>

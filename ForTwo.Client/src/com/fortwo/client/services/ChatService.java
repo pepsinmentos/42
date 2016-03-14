@@ -53,5 +53,9 @@ public class ChatService {
 		return new Chat();
 	}
 	
+	public void SendChat(Chat chat){
+		
+	}
+	
 	
 }

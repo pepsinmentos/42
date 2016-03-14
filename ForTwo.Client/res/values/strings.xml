@@ -9,6 +9,8 @@
     <string name="edit_text_hint">TODO</string>
     <string name="save">TODO</string>
     <string name="enter_new_chat">Enter new chat</string>
+    <string name="logo_image">Logo</string>
+    <string name="title_activity_basic_setup">BasicSetupActivity</string>
+    <string name="title_activity_chat_text_box">ChatTextBoxActivity</string>
 
 </resources>
-
