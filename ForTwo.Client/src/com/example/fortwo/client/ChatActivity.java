@@ -7,6 +7,7 @@ import com.example.fortwo.client.model.Chat;
 import com.fortwo.client.services.ChatService;
 
 import android.app.ActionBar.LayoutParams;
+import android.graphics.Typeface;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class ChatActivity extends Activity {
 		//getInitialChats();
 		
 		setChatButtonHandler();
+		setChatTextInput();
 		
 	}
 	
@@ -55,15 +57,26 @@ public class ChatActivity extends Activity {
 		
 	}
 	
+	private void setChatTextInput(){
+		EditText textInput = (EditText)findViewById(R.id.chat_text_input);		
+		Typeface tf = Typeface.createFromAsset(getAssets(), "DaoType.ttf");
+		textInput.setTypeface(tf);
+		
+	}
+	
 	
 	private void addChatLine(String chatMessage){
 		try {
 
 			View linearLayout = findViewById(R.id.chat_view);
+			Typeface tf = Typeface.createFromAsset(getAssets(), "DaoType.ttf");
+			
 
 			TextView valueTV = new TextView(ChatActivity.this);
 			valueTV.setBackgroundResource(R.drawable.chat_text);
-			valueTV.setPadding(10, 10, 10, 10);
+			valueTV.setPadding(10, 10, 10, 5);
+			valueTV.setTypeface(tf);
+			valueTV.setTextSize(20);
 	
 			
 			valueTV.setText(chatMessage);

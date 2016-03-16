@@ -53,7 +53,7 @@ public class ChatService {
 		return new Chat();
 	}
 	
-	public void SendChat(Chat chat){
+	public void sendChat(Chat chat){
 		
 	}
 	
