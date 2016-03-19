@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,9 +79,10 @@ public class ChatActivity extends Activity {
 			TextView valueTV = new TextView(ChatActivity.this);
 			//valueTV.setBackgroundResource(R.drawable.chat_text);
 			valueTV.setTextAppearance(this, R.style.chat_text_style);
-			valueTV.setPadding(60, 10, 10, 10);
+			valueTV.setPadding(0, 0, 7, 7);
 			valueTV.setTypeface(tf);
 			valueTV.setTextSize(20);
+			valueTV.setGravity(Gravity.TOP);
 	
 			
 			valueTV.setText(chatMessage);
