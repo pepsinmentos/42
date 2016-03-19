@@ -2,16 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="top"
     android:orientation="vertical"
     tools:context="com.example.fortwo.client.ChatActivity" >
 
     <LinearLayout
         android:id="@+id/chat_view"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="9"
-        android:background="@drawable/background2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="top"
         android:orientation="vertical" >
 
@@ -60,54 +57,68 @@
                 android:background="@drawable/burger" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/TextView01"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.08" >
+
+            <!--  
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/background2"
+                    android:tileMode="repeat" >
+                </ImageView>
+-->
+   
+                <LinearLayout
+                    android:id="@+id/chat_container"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chat_background"
+                    android:gravity="top"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.43"
+                        android:text="asdf\nasdf\n\n\n\n\n\n\n\n\n\n\n\n\n\ntest\n\n\n\n\n\n\testn\n\n\n\n\n\n\n\n\n\n\n\ntest" />
+                </LinearLayout>
+   
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/input_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_gravity="bottom"
             android:background="@color/red"
-            android:padding="10dp"
-            android:text="TextView" />
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:padding="5dp" >
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/red"
-            android:text="TextView" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/chat_text_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:background="@drawable/custom_rectangle"
+                android:ems="10"
+                android:inputType="textMultiLine" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_weight="0"
-        android:background="@color/red"
-        android:gravity="bottom"
-        android:orientation="horizontal"
-        android:padding="5dp" >
-
-        <EditText
-            android:id="@+id/chat_text_input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="9"
-            android:background="@drawable/custom_rectangle"
-            android:ems="10"
-            android:inputType="textMultiLine"            
-            >
-            
-
-            <requestFocus />
-        </EditText>
-
-        <Button
-            android:id="@+id/chat_submit_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button" >
-        </Button>
+            <Button
+                android:id="@+id/chat_submit_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/button" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

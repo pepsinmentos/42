@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ForTwo.Client</string>
+    <string name="app_name">42</string>
     <string name="hello_world">Hello world!</string>
     <string name="get_chats">Get chats</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_chat">42</string>
     <string name="edit_text_hint">TODO</string>
     <string name="save">TODO</string>
     <string name="enter_new_chat">Enter new chat</string>
     <string name="logo_image">Logo</string>
     <string name="title_activity_basic_setup">BasicSetupActivity</string>
     <string name="title_activity_chat_text_box">ChatTextBoxActivity</string>
-
+  
 </resources>

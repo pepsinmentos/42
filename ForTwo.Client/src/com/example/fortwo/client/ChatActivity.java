@@ -15,10 +15,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class ChatActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_chat);
 
 		chatService = new ChatService();
@@ -68,13 +71,14 @@ public class ChatActivity extends Activity {
 	private void addChatLine(String chatMessage){
 		try {
 
-			View linearLayout = findViewById(R.id.chat_view);
+			View linearLayout = findViewById(R.id.chat_container);
 			Typeface tf = Typeface.createFromAsset(getAssets(), "DaoType.ttf");
 			
 
 			TextView valueTV = new TextView(ChatActivity.this);
-			valueTV.setBackgroundResource(R.drawable.chat_text);
-			valueTV.setPadding(10, 10, 10, 5);
+			//valueTV.setBackgroundResource(R.drawable.chat_text);
+			valueTV.setTextAppearance(this, R.style.chat_text_style);
+			valueTV.setPadding(60, 10, 10, 10);
 			valueTV.setTypeface(tf);
 			valueTV.setTextSize(20);
 	
@@ -83,11 +87,11 @@ public class ChatActivity extends Activity {
 			
 			Random rand = new Random();
 			valueTV.setId(rand.nextInt());			
-			LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			layoutParams.setMargins(12, 12, 12, 12);
-			valueTV.setLayoutParams(layoutParams);
+			//LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			//layoutParams.setMargins(12, 12, 12, 12);
+			//valueTV.setLayoutParams(layoutParams);
 			
-			Log.d(LoggingConstants.LOGGING_TAG, Integer.toString(((LayoutParams)valueTV.getLayoutParams()).leftMargin)); 
+			//Log.d(LoggingConstants.LOGGING_TAG, Integer.toString(((LayoutParams)valueTV.getLayoutParams()).leftMargin)); 
 			
 			((LinearLayout) linearLayout).addView(valueTV);
 			
