@@ -79,7 +79,8 @@ public class ChatActivity extends Activity {
 			TextView valueTV = new TextView(ChatActivity.this);
 			//valueTV.setBackgroundResource(R.drawable.chat_text);
 			valueTV.setTextAppearance(this, R.style.chat_text_style);
-			valueTV.setPadding(0, 0, 7, 7);
+			valueTV.setLineSpacing(1,1);
+			valueTV.setPadding(0, 0, 10, 10);
 			valueTV.setTypeface(tf);
 			valueTV.setTextSize(20);
 			valueTV.setGravity(Gravity.TOP);
