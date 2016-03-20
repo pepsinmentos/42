@@ -1,5 +1,6 @@
 package com.fortwo.server.resource;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -15,6 +16,7 @@ import org.atmosphere.cpr.ApplicationConfig;
 import org.atmosphere.cpr.AtmosphereResource;
 import org.atmosphere.cpr.AtmosphereResourceEvent;
 import org.atmosphere.cpr.AtmosphereResourceEventListenerAdapter;
+import org.atmosphere.cpr.BroadcasterFactory;
 import org.atmosphere.interceptor.AtmosphereResourceLifecycleInterceptor;
 
 import com.fortwo.server.model.Chat;
@@ -24,6 +26,9 @@ import com.fortwo.server.model.Chat;
 		TrackMessageSizeInterceptor.class }, path = "/chat", servlet = "org.glassfish.jersey.servlet.ServletContainer")
 public class ChatPushServer {
 	
+	//@Inject
+	private BroadcasterFactory factory;
+	
 	@Context
 	private HttpServletRequest request;
 
@@ -31,7 +36,11 @@ public class ChatPushServer {
 	@Path("/{userId}")
 	public void configureAtmosphereResource(@PathParam("userId") long userId) {
 		System.out.println("UserId connected: " + Long.toString(userId));
-		AtmosphereResource r = (AtmosphereResource) request.getAttribute(ApplicationConfig.ATMOSPHERE_RESOURCE);
+		AtmosphereResource r = (AtmosphereResource) request.getAttribute(ApplicationConfig.ATMOSPHERE_RESOURCE);		
+		
+		if(factory != null){
+			System.out.println("Injection worked!"); 
+		}
 
 		if (r != null) {
 			r.addEventListener(new AtmosphereResourceEventListenerAdapter.OnDisconnect() {
@@ -47,6 +56,8 @@ public class ChatPushServer {
 					}
 				}
 			});
+			
+			r.write("hello and welcome");
 		} else {
 			throw new IllegalStateException();
 		}
@@ -59,6 +70,8 @@ public class ChatPushServer {
 		Chat message = m;
 		System.out.println("Sending message: " + message.getMessage() + " from userId: " + message.getUserId() + " to recipient: " + message.getRecipientId());
 		AtmosphereResource r = (AtmosphereResource) request.getAttribute(ApplicationConfig.ATMOSPHERE_RESOURCE);
+		
+		
 
 		if (r != null) {
 			System.out.println("FUCK YEAH: " + message);
