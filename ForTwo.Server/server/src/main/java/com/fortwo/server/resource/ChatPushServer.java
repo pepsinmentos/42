@@ -56,7 +56,7 @@ public class ChatPushServer {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@org.atmosphere.config.service.Message(encoders = {com.fortwo.server.model.JacksonEncoder.class}, decoders = {com.fortwo.server.model.JacksonDecoder.class})
 	public void broadcast(Chat m) {		
-		Chat message = new Chat();    
+		Chat message = m;
 		System.out.println("Sending message: " + message.getMessage() + " from userId: " + message.getUserId() + " to recipient: " + message.getRecipientId());
 		AtmosphereResource r = (AtmosphereResource) request.getAttribute(ApplicationConfig.ATMOSPHERE_RESOURCE);
 
