@@ -7,6 +7,7 @@ public class Chat {
 	private Date createdOn;
 	private long chatId;
 	private long userId;
+	private long recipientId;
 	
 	public Chat(){
 		
@@ -14,10 +15,11 @@ public class Chat {
 	
 	
 	
-	public Chat(String message, long chatId, long userId) {	
+	public Chat(String message, long chatId, long userId, long recipientId) {	
 		this.message = message;
 		this.chatId = chatId;
 		this.userId = userId;
+		this.recipientId = recipientId;
 		this.createdOn = new Date();
 	}
 
@@ -48,6 +50,12 @@ public class Chat {
 		this.userId = userId;
 	}
 	
+	public long getRecipientId(){
+		return recipientId;
+	}
+	public void setRecipientId(long recipientId){
+		this.recipientId = recipientId;
+	}
 	
 
 }
