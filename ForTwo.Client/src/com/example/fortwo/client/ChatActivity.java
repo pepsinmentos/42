@@ -6,7 +6,7 @@ import com.example.fortwo.client.constants.LoggingConstants;
 import com.example.fortwo.client.model.Chat;
 import com.fortwo.client.services.ChatService;
 
-import android.app.ActionBar.LayoutParams;
+
 import android.graphics.Typeface;
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -20,7 +20,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
