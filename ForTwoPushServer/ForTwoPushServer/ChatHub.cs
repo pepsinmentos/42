@@ -21,16 +21,25 @@ namespace ForTwoPushServer
 
         public override Task OnConnected()
         {
-            if (!ConnectionUserId.ContainsKey(GetUserIdFromHeaders()))
+            var userId = GetUserIdFromHeaders();
+            if (!ConnectionUserId.ContainsKey(userId))
             {
-                ConnectionUserId.Add(GetUserIdFromHeaders(), Context.ConnectionId);
+                ConnectionUserId.Add(userId, Context.ConnectionId);
+            }
+            else
+            {
+                if (ConnectionUserId[userId] != Context.ConnectionId)
+                {
+                    ConnectionUserId.Remove(userId);
+                    ConnectionUserId.Add(userId, Context.ConnectionId);
+                }
             }
             return base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            if (!ConnectionUserId.ContainsKey(GetUserIdFromHeaders()))
+            if (ConnectionUserId.ContainsKey(GetUserIdFromHeaders()))
             {
                 ConnectionUserId.Remove(GetUserIdFromHeaders());
             }
@@ -39,9 +48,18 @@ namespace ForTwoPushServer
 
         public override Task OnReconnected()
         {
-            if (!ConnectionUserId.ContainsKey(GetUserIdFromHeaders()))
+            var userId = GetUserIdFromHeaders();
+            if (!ConnectionUserId.ContainsKey(userId))
             {
-                ConnectionUserId.Add(GetUserIdFromHeaders(), Context.ConnectionId);
+                ConnectionUserId.Add(userId, Context.ConnectionId);
+            }
+            else
+            {
+                if (ConnectionUserId[userId] != Context.ConnectionId)
+                {
+                    ConnectionUserId.Remove(userId);
+                    ConnectionUserId.Add(userId, Context.ConnectionId);
+                }
             }
             return base.OnReconnected();
         }

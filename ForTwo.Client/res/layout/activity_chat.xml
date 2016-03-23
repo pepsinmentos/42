@@ -1,124 +1,123 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_gravity="bottom"
     tools:context="com.example.fortwo.client.ChatActivity" >
 
-    <LinearLayout
-        android:id="@+id/chat_view"
+    <RelativeLayout
+        android:id="@+id/home_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="top"
-        android:orientation="vertical" >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="top" >
 
-        <LinearLayout
-            android:id="@+id/chat_notification_bar"
+        <ScrollView
+            android:id="@+id/chat_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:id="@+id/chat_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chat_background"
+                android:gravity="top"
+                android:minHeight="600dp"
+                android:orientation="vertical"
+                android:paddingBottom="100dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:paddingTop="100dp"
+                android:scrollbars="none" >
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/menu_bar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/notification"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:background="@drawable/bell" >
-            </Button>
-
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="match_parent" />
-
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="match_parent" />
-
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="match_parent" />
-
-            <Button
-                android:id="@+id/attach"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/paperclip" >
-            </Button>
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/menubar" >
 
             <Button
                 android:id="@+id/menu"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
                 android:background="@drawable/burger" />
-        </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.08" >
+            <Button
+                android:id="@+id/notification"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/bell" />
 
-            <!--  
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <Button
+                android:id="@+id/attach"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/menu"
+                android:background="@drawable/paperclip" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/background2"
-                    android:tileMode="repeat" >
-                </ImageView>
--->
-   
-                <LinearLayout
-                    android:id="@+id/chat_container"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/chat_background"
-                    android:gravity="top"
-                    android:orientation="vertical" >
+        </RelativeLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.43"
-                        android:text="asdf\nasdf\n\n\n\n\n\n\n\n\n\n\n\n\n\ntest\n\n\n\n\n\n\testn\n\n\n\n\n\n\n\n\n\n\n\ntest" />
-                </LinearLayout>
-   
-        </ScrollView>
-
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/input_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/red"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:padding="5dp" >
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true" >
 
             <EditText
                 android:id="@+id/chat_text_input"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:background="@drawable/custom_rectangle"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/textbox"
                 android:ems="10"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="55dp"
+                android:paddingTop="60dp" >
+
+                <requestFocus android:layout_width="match_parent" />
+            </EditText>
 
             <Button
                 android:id="@+id/chat_submit_button"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@drawable/button" />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/pen" />
 
-</LinearLayout>
+            <Space
+                android:id="@+id/Space1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/chat_submit_button"
+                android:layout_toRightOf="@+id/chat_submit_button" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

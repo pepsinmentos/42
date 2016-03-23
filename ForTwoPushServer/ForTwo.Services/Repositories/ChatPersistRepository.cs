@@ -35,6 +35,7 @@ namespace ForTwo.Services.Repositories
             catch (Exception ex)
             {
                 ExceptionService.HandleException(ex);
+                return new ChatLine();
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,42 +9,48 @@ using Microsoft.AspNet.SignalR.Client;
 
 namespace Client.Test
 {
-    class Program
+    internal class Program
     {
-        static int userId;
-        static int recipientId;
-        static void Main(string[] args)
+        private static int userId;
+        private static int recipientId;
+
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Please enter your UserId: ");
-            userId = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter RecipientId: ");
-            recipientId = Int32.Parse(Console.ReadLine());
-
-
-            var hubConnection = new HubConnection("http://localhost:8080");
-            hubConnection.Headers.Add("UserId", userId.ToString());
-            IHubProxy chatHub = hubConnection.CreateHubProxy("ChatHub");
-            chatHub.On<ChatLine>("addMessage", message => 
+            try
             {
-                WriteChatToClient(message);
-            });
-            hubConnection.Start().Wait();
+                Console.WriteLine("Please enter your UserId: ");
+                userId = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Please enter RecipientId: ");
+                recipientId = Int32.Parse(Console.ReadLine());
 
-            string s = string.Empty;
+                var hubUrl = ConfigurationManager.AppSettings["hub_url"];
+                var hubConnection = new HubConnection(hubUrl);
+                hubConnection.Headers.Add("UserId", userId.ToString());
+                IHubProxy chatHub = hubConnection.CreateHubProxy("ChatHub");
+                chatHub.On<ChatLine>("addMessage", message => { WriteChatToClient(message); });
+                hubConnection.Start().Wait();
 
-            var unreadMessages = chatHub.Invoke<IEnumerable<ChatLine>>("GetUnreadMessages").Result;
-            foreach (var unreadMessage in unreadMessages)
-            {
-                WriteChatToClient(unreadMessage);
+                string s = string.Empty;
+
+                var unreadMessages = chatHub.Invoke<IEnumerable<ChatLine>>("GetUnreadMessages").Result;
+                foreach (var unreadMessage in unreadMessages)
+                {
+                    WriteChatToClient(unreadMessage);
+                }
+
+                while (s != "stop")
+                {
+                    s = NextMessage();
+                    chatHub.Invoke("Send", new ChatLine {Message = s, SenderId = userId, RecipientId = recipientId});
+                }
+
+                Console.ReadLine();
             }
-
-            while (s != "stop")
+            catch (Exception ex)
             {
-                s = NextMessage();
-                chatHub.Invoke("Send", new ChatLine { Message = s, SenderId = userId, RecipientId = recipientId });
+                Console.WriteLine(ex.ToString());
+                Console.ReadKey();
             }
-
-            Console.ReadLine();
         }
 
         public static string NextMessage()
@@ -54,9 +61,7 @@ namespace Client.Test
         public static void WriteChatToClient(ChatLine chat)
         {
             Console.Write(chat.SenderId + ": ");
-            Console.WriteLine(chat.Message); 
+            Console.WriteLine(chat.Message);
         }
     }
-
-    
 }
