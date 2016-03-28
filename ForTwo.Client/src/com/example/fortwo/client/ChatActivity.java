@@ -3,13 +3,16 @@ package com.example.fortwo.client;
 
 import java.util.Random;
 
+import com.example.fortwo.client.constants.KeyValueConstants;
 import com.example.fortwo.client.constants.LoggingConstants;
-import com.example.fortwo.client.model.Chat;
+import com.example.fortwo.client.listeners.ChatReceivedListener;
+import com.example.fortwo.client.model.ChatLine;
 import com.fortwo.client.services.ChatService;
 
 
 import android.graphics.Typeface;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,9 +27,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ChatActivity extends Activity {
+public class ChatActivity extends Activity implements ChatReceivedListener {
 
 	private ChatService chatService;
+	private int userId;
+	private int partnerUserId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +39,21 @@ public class ChatActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_chat);
 
-		chatService = new ChatService();
+		SharedPreferences prefs = getSharedPreferences(KeyValueConstants.SharedPreferencesName, MODE_PRIVATE);
+		userId = prefs.getInt(KeyValueConstants.UserIdKey, 0);
+		Log.d(LoggingConstants.LOGGING_TAG, "Got userId from shared prefs: " + userId);
+		partnerUserId = prefs.getInt(KeyValueConstants.PartnerUserIdKey, 0);
+		Log.d(LoggingConstants.LOGGING_TAG, "Got partner userId from shared prefs: " + partnerUserId);
+		
+		chatService = new ChatService(userId);
 		//getInitialChats();
+		chatService.addChatReceivedListener(this);
 		
 		setChatButtonHandler();
 		setChatTextInput();
+		
+
+	
 		
 	}
 	
@@ -50,7 +65,7 @@ public class ChatActivity extends Activity {
 				EditText chatTextInput = (EditText)findViewById(R.id.chat_text_input);
 				String chatMessage = chatTextInput.getText().toString();
 				
-				chatService.sendChat(new Chat(chatMessage, 1, 1));
+				chatService.sendChat(new ChatLine(userId, partnerUserId, chatMessage));
 				
 				addChatLine(chatMessage);				
 				
@@ -102,16 +117,16 @@ public class ChatActivity extends Activity {
 	
 	private void getInitialChats(){
 
-		AsyncTask<Void, Void, Chat> getChatTask = new AsyncTask<Void, Void, Chat>() {
+		AsyncTask<Void, Void, ChatLine> getChatTask = new AsyncTask<Void, Void, ChatLine>() {
 
 			@Override
-			protected Chat doInBackground(Void... params) {
+			protected ChatLine doInBackground(Void... params) {
 				Toast.makeText(ChatActivity.this, "Getting chats from server", Toast.LENGTH_LONG).show();
 				return chatService.getChat();
 			}
 
 			@Override
-			protected void onPostExecute(Chat result) {
+			protected void onPostExecute(ChatLine result) {
 				Log.d(LoggingConstants.LOGGING_TAG, "got chat successfully");
 				addChatLine(result.getMessage());
 
@@ -140,5 +155,21 @@ public class ChatActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void ChatReceived(final ChatLine chatLine) {
+		// TODO Auto-generated method stub	
+		if(chatLine.getMessage() == null)
+			chatLine.setMessage("NULL");
+		
+		this.runOnUiThread(new Runnable(){
+
+			@Override
+			public void run() {
+				addChatLine(chatLine.getMessage());
+				
+			}});
+	
 	}
 }

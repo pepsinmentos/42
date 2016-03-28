@@ -1,24 +1,24 @@
 package com.fortwo.client.services;
 
-import com.example.fortwo.client.model.Chat;
+import com.example.fortwo.client.model.ChatLine;
 
 public class ChatServiceStub implements IChatService{
 	
 	@Override
-	public Chat getChat() {
+	public ChatLine getChat() {
 		// TODO Auto-generated method stub
 		return stubChat();
 	}
 
 	@Override
-	public Chat sendChat(Chat chat) {
+	public ChatLine sendChat(ChatLine chat) {
 		return chat;
 	}
 	
 	
-	private Chat stubChat()
+	private ChatLine stubChat()
 	{
-		return new Chat("Stub message", 1,1);
+		return new ChatLine(1,1, "Stub message");
 	}
 
 }

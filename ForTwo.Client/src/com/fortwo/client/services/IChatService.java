@@ -1,9 +1,9 @@
 package com.fortwo.client.services;
 
-import com.example.fortwo.client.model.Chat;
+import com.example.fortwo.client.model.ChatLine;
 
 public interface IChatService {
-	Chat getChat();
-	Chat sendChat(Chat chat);
+	ChatLine getChat();
+	ChatLine sendChat(ChatLine chat);
 
 }
