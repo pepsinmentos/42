@@ -34,7 +34,7 @@ public class ChatService {
 
 			@Override
 			protected Void doInBackground(Void... arg0) {
-				String host = "http://192.168.1.5:8080/signalr";
+				String host = "http://fourtwo.co.za/signalr";
 				HubConnection connection = new HubConnection(host);
 				Log.d("PR", "Go connection");
 				try {
