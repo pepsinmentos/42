@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper">
       <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
     </Reference>
@@ -49,11 +52,14 @@
     <Compile Include="Interfaces\IChatService.cs" />
     <Compile Include="Interfaces\IDatabaseConfig.cs" />
     <Compile Include="Interfaces\IExceptionService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="IoCRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IChatPersist.cs" />
     <Compile Include="Repositories\ChatPersistRepository.cs" />
     <Compile Include="Repositories\DatabaseConfig.cs" />
     <Compile Include="Repositories\SQL\BaseRepositorySql.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

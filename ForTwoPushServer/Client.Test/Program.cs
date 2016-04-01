@@ -27,7 +27,7 @@ namespace Client.Test
                 var hubConnection = new HubConnection(hubUrl);
                 hubConnection.Headers.Add("UserId", userId.ToString());
                 IHubProxy chatHub = hubConnection.CreateHubProxy("ChatHub");
-                chatHub.On<ChatLine>("addMessage", message => { WriteChatToClient(message); });
+                chatHub.On<string>("addMessage", message => { WriteChatToClient(new ChatLine() { Message = message }); });
                 hubConnection.Start().Wait();
 
                 string s = string.Empty;

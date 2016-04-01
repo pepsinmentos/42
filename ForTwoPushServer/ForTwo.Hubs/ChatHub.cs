@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ForTwo.Interop;
 using Microsoft.AspNet.SignalR;
 
-namespace ForTwoPushServer
+namespace ForTwo.Hubs
 {
     public class ChatHub : Hub
     {
         private Dictionary<int, string> ConnectionUserId;
 
+        public ChatHub()
+        {
+            
+        }
         public ChatHub(Dictionary<int, string> connectionUserId)
         {
             ConnectionUserId = connectionUserId;
@@ -34,6 +37,7 @@ namespace ForTwoPushServer
                     ConnectionUserId.Add(userId, Context.ConnectionId);
                 }
             }
+            Console.WriteLine("UserId: {0} connected", userId);
             return base.OnConnected();
         }
 
@@ -43,6 +47,7 @@ namespace ForTwoPushServer
             {
                 ConnectionUserId.Remove(GetUserIdFromHeaders());
             }
+            Console.WriteLine("UserId: {0} disconnected", GetUserIdFromHeaders());
             return base.OnDisconnected(stopCalled);
         }
 
@@ -61,6 +66,7 @@ namespace ForTwoPushServer
                     ConnectionUserId.Add(userId, Context.ConnectionId);
                 }
             }
+            Console.WriteLine("UserId: {0} reconnected", userId);
             return base.OnReconnected();
         }
 
@@ -70,8 +76,13 @@ namespace ForTwoPushServer
 
         public void Send(ChatLine message)
         {
+            Console.WriteLine("Received messages: {0}", message.Message);
+
             if (ConnectionUserId.ContainsKey(message.RecipientId))
-                Clients.Client(ConnectionUserId[message.RecipientId]).addMessage(message);
+            {
+                Clients.Client(ConnectionUserId[message.RecipientId]).addMessage(message.Message);
+                Console.WriteLine("Message sent to UserId: {0}", message.RecipientId);
+            }
         }
 
         public async Task<IEnumerable<ChatLine>> GetUnreadMessages()
@@ -79,6 +90,18 @@ namespace ForTwoPushServer
             var userId = GetUserIdFromHeaders();
             var result = await Task.Run<IEnumerable<ChatLine>>(() => UnreadMessages());
             return result.Where(c => c.RecipientId == userId);
+        }
+
+        public async Task<ChatLine> GetOneUnreadMessage(int us)
+        {
+            var userId = GetUserIdFromHeaders();
+            var result = await Task.Run<IEnumerable<ChatLine>>(() => UnreadMessages());
+            return result.First(c => c.RecipientId == userId);
+        }
+
+        public string getstuff()
+        {
+            return "this is a thing";
         }
 
         #endregion
@@ -104,7 +127,9 @@ namespace ForTwoPushServer
 
         private int GetUserIdFromHeaders()
         {
-            return Int32.Parse(Context.Request.Headers["UserId"]);
+            if (Context.Request.Headers["UserId"] != null)
+                return Int32.Parse(Context.Request.Headers["UserId"]);
+            return 0;
         }
 
         #endregion

@@ -84,7 +84,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatHub.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -96,16 +95,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.4.js" />
-    <Content Include="Scripts\jquery-1.6.4.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="server_setup_scripts.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ForTwo.Hubs\ForTwo.Hubs.csproj">
+      <Project>{1120cd95-6112-4dce-b989-b4447c7651f3}</Project>
+      <Name>ForTwo.Hubs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ForTwo.Interop\ForTwo.Interop.csproj">
       <Project>{de1c0f34-06de-438e-a72e-a0c76c0b6199}</Project>
       <Name>ForTwo.Interop</Name>
