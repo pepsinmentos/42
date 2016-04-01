@@ -31,7 +31,7 @@
         </receiver>
 
         <service
-            android:name="GetChatService"
+            android:name="com.fortwo.client.services.GetChatService"
             android:exported="false" />
 
         <activity

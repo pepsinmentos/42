@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import com.example.fortwo.client.constants.LoggingConstants;
 import com.example.fortwo.client.listeners.ChatReceivedListener;
@@ -30,46 +33,37 @@ public class ChatService {
 		this.senderId = senderId;
 		Platform.loadPlatformComponent(new AndroidPlatformComponent());
 
-		AsyncTask<Void, Void, Void> v = new AsyncTask<Void, Void, Void>() {
+		String host = "http://fourtwo.co.za/signalr";
+		HubConnection connection = new HubConnection(host);
+		Log.d("PR", "Go connection");
+		try {
+			connection.setCredentials(new Credentials() {
 
-			@Override
-			protected Void doInBackground(Void... arg0) {
-				String host = "http://fourtwo.co.za/signalr";
-				HubConnection connection = new HubConnection(host);
-				Log.d("PR", "Go connection");
-				try {
-					connection.setCredentials(new Credentials() {
-						
-						@Override
-						public void prepareRequest(Request request) {
-							request.addHeader("UserId", Integer.toString(senderId));							
-						}
-					});					
-				} catch (Exception ex) {
-					Log.e(LoggingConstants.LOGGING_TAG, ex.toString());
-
+				@Override
+				public void prepareRequest(Request request) {
+					request.addHeader("UserId", Integer.toString(senderId));
 				}
-				hub = connection.createHubProxy("ChatHub");
-				Log.d("PR", "Go hub");
-				SignalRFuture<Void> awaitConnection = connection.start();
-				Log.d("PR", "Go connection start");
-				try {
-					awaitConnection.get();
-					Log.d("PR", "Go connection get");
-				} catch (Exception ex) {
-					Log.e("PR",  ex.toString());
-					for (StackTraceElement st : ex.getStackTrace()) {
-						Log.e("PR",  st.toString());
-					}
-				}
+			});
+		} catch (Exception ex) {
+			Log.e(LoggingConstants.LOGGING_TAG, ex.toString());
 
-				hub.subscribe(ChatService.this);
-				return null;
+		}
+		hub = connection.createHubProxy("ChatHub");
+		Log.d("PR", "Go hub");
+		SignalRFuture<Void> awaitConnection = connection.start();
+		Log.d("PR", "Go connection start");
+		try {
+			awaitConnection.get();
+			Log.d("PR", "Go connection get");
+		} catch (Exception ex) {
+			Log.e("PR", ex.toString());
+			for (StackTraceElement st : ex.getStackTrace()) {
+				Log.e("PR", st.toString());
 			}
+		}
 
-		};
+		hub.subscribe(ChatService.this);
 
-		v.execute();
 	}
 
 	public ChatLine getChat() {
@@ -101,17 +95,32 @@ public class ChatService {
 		return new ChatLine();
 	}
 
+	public ChatLine getUnreadChatLines(){
+		
+		try {
+			ChatLine s = hub.invoke(ChatLine.class, "GetUnreadMessages", null).get();
+			return s;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new ChatLine();
+	}
 	public void sendChat(ChatLine chat) {
 		Log.d("PR", "Sending chat now");
-		hub.invoke("Send", chat); 
+		hub.invoke("Send", chat);
 	}
 
-	public void addMessage(String  m) { 
+	public void addMessage(String m) {
 		Log.d("PR", "I GOT THE FUCKING MESSAGE: " + m);
-		chatReceivedListener.ChatReceived(new ChatLine(senderId,1,m));
+		chatReceivedListener.ChatReceived(new ChatLine(senderId, 1, m));
 	}
 
-	public void addChatReceivedListener(ChatReceivedListener listener){
+	public void addChatReceivedListener(ChatReceivedListener listener) {
 		chatReceivedListener = listener;
 	}
 }

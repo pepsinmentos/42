@@ -30,6 +30,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 		
 		try{
 			Class<?> serviceClass = Class.forName(className);
+			Log.d(LoggingConstants.LOGGING_TAG, "Got class. Starting wakeful service: " + serviceClass.toString());
 			startWakefulService(context, new Intent(context, serviceClass));
 		}
 		catch (ClassNotFoundException ex){

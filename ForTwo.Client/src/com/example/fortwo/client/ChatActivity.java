@@ -9,7 +9,6 @@ import com.example.fortwo.client.listeners.ChatReceivedListener;
 import com.example.fortwo.client.model.ChatLine;
 import com.fortwo.client.services.ChatService;
 
-
 import android.graphics.Typeface;
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -45,10 +44,19 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
 		partnerUserId = prefs.getInt(KeyValueConstants.PartnerUserIdKey, 0);
 		Log.d(LoggingConstants.LOGGING_TAG, "Got partner userId from shared prefs: " + partnerUserId);
 		
-		chatService = new ChatService(userId);
-		//getInitialChats();
-		chatService.addChatReceivedListener(this);
+		AsyncTask<Void, Void, Void> v = new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... arg0) {
+				chatService = new ChatService(userId);
+				//getInitialChats();
+				chatService.addChatReceivedListener(ChatActivity.this);
+				return null;
+			}
+			
+		};
 		
+		v.execute();
 		setChatButtonHandler();
 		setChatTextInput();
 		
@@ -56,66 +64,66 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
 	
 		
 	}
-	
-	private void setChatButtonHandler(){
-		((Button)findViewById(R.id.chat_submit_button)).setOnClickListener(new OnClickListener() {
-			
+
+	private void setChatButtonHandler() {
+		((Button) findViewById(R.id.chat_submit_button)).setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View arg0) {
-				EditText chatTextInput = (EditText)findViewById(R.id.chat_text_input);
+				EditText chatTextInput = (EditText) findViewById(R.id.chat_text_input);
 				String chatMessage = chatTextInput.getText().toString();
-				
+
 				chatService.sendChat(new ChatLine(userId, partnerUserId, chatMessage));
-				
-				addChatLine(chatMessage);				
-				
+
+				addChatLine(chatMessage);
+
 				chatTextInput.getText().clear();
 			}
 		});
-		
+
 	}
-	
-	private void setChatTextInput(){
-		EditText textInput = (EditText)findViewById(R.id.chat_text_input);		
+
+	private void setChatTextInput() {
+		EditText textInput = (EditText) findViewById(R.id.chat_text_input);
 		Typeface tf = Typeface.createFromAsset(getAssets(), "DaoType.ttf");
 		textInput.setTypeface(tf);
-		
+
 	}
-	
-	
-	private void addChatLine(String chatMessage){
+
+	private void addChatLine(String chatMessage) {
 		try {
 
 			View linearLayout = findViewById(R.id.chat_container);
 			Typeface tf = Typeface.createFromAsset(getAssets(), "DaoType.ttf");
-			
 
 			TextView valueTV = new TextView(ChatActivity.this);
-			//valueTV.setBackgroundResource(R.drawable.chat_text);
+			// valueTV.setBackgroundResource(R.drawable.chat_text);
 			valueTV.setTextAppearance(this, R.style.chat_text_style);
 			valueTV.setPadding(60, 10, 10, 10);
 			valueTV.setTypeface(tf);
 			valueTV.setTextSize(20);
-	
-			
+
 			valueTV.setText(chatMessage);
-			
+
 			Random rand = new Random();
-			valueTV.setId(rand.nextInt());			
-			//LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			//layoutParams.setMargins(12, 12, 12, 12);
-			//valueTV.setLayoutParams(layoutParams);
-			
-			//Log.d(LoggingConstants.LOGGING_TAG, Integer.toString(((LayoutParams)valueTV.getLayoutParams()).leftMargin)); 
-			
+			valueTV.setId(rand.nextInt());
+			// LayoutParams layoutParams = new
+			// LayoutParams(LayoutParams.WRAP_CONTENT,
+			// LayoutParams.WRAP_CONTENT);
+			// layoutParams.setMargins(12, 12, 12, 12);
+			// valueTV.setLayoutParams(layoutParams);
+
+			// Log.d(LoggingConstants.LOGGING_TAG,
+			// Integer.toString(((LayoutParams)valueTV.getLayoutParams()).leftMargin));
+
 			((LinearLayout) linearLayout).addView(valueTV);
-			
+
 		} catch (Exception e) {
 			Log.e("PR", e.toString());
 		}
 	}
-	
-	private void getInitialChats(){
+
+	private void getInitialChats() {
 
 		AsyncTask<Void, Void, ChatLine> getChatTask = new AsyncTask<Void, Void, ChatLine>() {
 
@@ -133,7 +141,7 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
 			}
 
 		};
-		
+
 		getChatTask.execute();
 	}
 
@@ -143,7 +151,6 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
 		getMenuInflater().inflate(R.menu.chat, menu);
 		return true;
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -159,17 +166,18 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
 
 	@Override
 	public void ChatReceived(final ChatLine chatLine) {
-		// TODO Auto-generated method stub	
-		if(chatLine.getMessage() == null)
+		// TODO Auto-generated method stub
+		if (chatLine.getMessage() == null)
 			chatLine.setMessage("NULL");
-		
-		this.runOnUiThread(new Runnable(){
+
+		this.runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
 				addChatLine(chatLine.getMessage());
-				
-			}});
-	
+
+			}
+		});
+
 	}
 }
