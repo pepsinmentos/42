@@ -13,16 +13,16 @@ namespace ForTwo.Services
         protected readonly IChatPersist ChatPersist;
         protected readonly IChatReader ChatReader;
 
-        public ChatService(IChatPersist chatPersist)
+        public ChatService()
         {
-            ChatPersist = chatPersist;
+            //ChatPersist = chatPersist;
         }
 
         public void SaveChatLine(ChatLine chatLine)
         {
             try
             {
-                ChatPersist.SaveChatLine(chatLine);
+               // ChatPersist.SaveChatLine(chatLine);
             }
             catch (Exception ex)
             {
@@ -34,9 +34,25 @@ namespace ForTwo.Services
 
         public List<ChatLine> GetUnreadChatLines(int userId)
         {
-            throw new NotImplementedException();
+            return UnreadMessages().Where(x => x.RecipientId == userId).ToList();   
         }
 
+        private List<ChatLine> UnreadMessages()
+        {
+            return new List<ChatLine>()
+            {
+                new ChatLine() {Message = "This is a delayed message", SenderId = 1, RecipientId = 2},
+                new ChatLine() {Message = "Dinner is ready", SenderId = 1, RecipientId = 2},
+                new ChatLine() {Message = "Dude... I just saw a snake", SenderId = 2, RecipientId = 1},
+                new ChatLine() {Message = "Can you believe this guy? ", SenderId = 4, RecipientId = 3},
+                new ChatLine()
+                {
+                    Message = "How many times have you listened to music today?",
+                    SenderId = 4,
+                    RecipientId = 3
+                }
+            };
+        }
         public List<ChatLine> GetChatLinesPaged(int userId, int pageSize, int chatLineCursorId)
         {
             throw new NotImplementedException();

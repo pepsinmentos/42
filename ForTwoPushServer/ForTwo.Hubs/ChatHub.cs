@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ForTwo.Interop;
+using ForTwo.Services.Interfaces;
 using Microsoft.AspNet.SignalR;
 
 namespace ForTwo.Hubs
@@ -10,14 +11,16 @@ namespace ForTwo.Hubs
     public class ChatHub : Hub
     {
         private Dictionary<int, string> ConnectionUserId;
+        private IChatService ChatService;
 
         public ChatHub()
         {
             
         }
-        public ChatHub(Dictionary<int, string> connectionUserId)
+        public ChatHub(Dictionary<int, string> connectionUserId, IChatService chatService)
         {
             ConnectionUserId = connectionUserId;
+            ChatService = chatService;
         }
 
         #region Overrides
@@ -88,14 +91,14 @@ namespace ForTwo.Hubs
         public async Task<IEnumerable<ChatLine>> GetUnreadMessages()
         {
             var userId = GetUserIdFromHeaders();
-            var result = await Task.Run<IEnumerable<ChatLine>>(() => UnreadMessages());
-            return result.Where(c => c.RecipientId == userId);
+            var result = await Task.Run<IEnumerable<ChatLine>>(() =>  ChatService.GetUnreadChatLines(userId));
+            return result;
         }
 
         public async Task<ChatLine> GetOneUnreadMessage(int us)
         {
             var userId = GetUserIdFromHeaders();
-            var result = await Task.Run<IEnumerable<ChatLine>>(() => UnreadMessages());
+            var result = await Task.Run<IEnumerable<ChatLine>>(() => ChatService.GetUnreadChatLines(userId));
             return result.First(c => c.RecipientId == userId);
         }
 
@@ -108,22 +111,7 @@ namespace ForTwo.Hubs
 
         #region Privates
 
-        private List<ChatLine> UnreadMessages()
-        {
-            return new List<ChatLine>()
-            {
-                new ChatLine() {Message = "This is a delayed message", SenderId = 1, RecipientId = 2},
-                new ChatLine() {Message = "Dinner is ready", SenderId = 1, RecipientId = 2},
-                new ChatLine() {Message = "Dude... I just saw a snake", SenderId = 2, RecipientId = 1},
-                new ChatLine() {Message = "Can you believe this guy? ", SenderId = 4, RecipientId = 3},
-                new ChatLine()
-                {
-                    Message = "How many times have you listened to music today?",
-                    SenderId = 4,
-                    RecipientId = 3
-                }
-            };
-        }
+       
 
         private int GetUserIdFromHeaders()
         {

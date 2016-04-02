@@ -1,0 +1,5 @@
+<resources>     
+     <string name="mutual_password">Mutual Password</string>
+     <string name="profile_pic">ProfilePic</string>
+     <string name="ok">OK</string>
+</resources>

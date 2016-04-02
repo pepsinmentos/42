@@ -1,0 +1,230 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitignore
+* .idea\
+* .idea\.name
+* .idea\compiler.xml
+* .idea\copyright\
+* .idea\copyright\profiles_settings.xml
+* .idea\misc.xml
+* .idea\modules.xml
+* .idea\vcs.xml
+* .idea\workspace.xml
+* app\
+* app\build.gradle
+* app\libs\
+* app\libs\async-http-client-1.9.20.jar
+* app\libs\jackson-annotations-2.6.0.jar
+* app\libs\jackson-core-2.6.4.jar
+* app\libs\jackson-databind-2.6.4.jar
+* app\libs\netty-3.10.1.Final.jar
+* app\libs\signalr-client-sdk-android.jar
+* app\libs\signalr-client-sdk.jar
+* app\libs\slf4j-api-1.7.7.jar
+* app\libs\wasync-2.1.2.jar
+* app\lint.xml
+* app\src\
+* app\src\main\
+* app\src\main\AndroidManifest.xml
+* app\src\main\assets\
+* app\src\main\assets\BoldType.ttf
+* app\src\main\assets\DaoType.ttf
+* app\src\main\assets\GirlType.ttf
+* app\src\main\assets\HandType.ttf
+* app\src\main\java\
+* app\src\main\java\com\
+* app\src\main\java\com\example\
+* app\src\main\java\com\example\fortwo\
+* app\src\main\java\com\example\fortwo\client\
+* app\src\main\java\com\example\fortwo\client\AlarmReceiver.java
+* app\src\main\java\com\example\fortwo\client\BasicSetupActivity.java
+* app\src\main\java\com\example\fortwo\client\ChatActivity.java
+* app\src\main\java\com\example\fortwo\client\ForTwoApplication.java
+* app\src\main\java\com\example\fortwo\client\LoginActivity.java
+* app\src\main\java\com\example\fortwo\client\constants\
+* app\src\main\java\com\example\fortwo\client\constants\KeyValueConstants.java
+* app\src\main\java\com\example\fortwo\client\constants\LoggingConstants.java
+* app\src\main\java\com\example\fortwo\client\listeners\
+* app\src\main\java\com\example\fortwo\client\listeners\BootListener.java
+* app\src\main\java\com\example\fortwo\client\listeners\ChatReceivedListener.java
+* app\src\main\java\com\example\fortwo\client\model\
+* app\src\main\java\com\example\fortwo\client\model\ChatLine.java
+* app\src\main\java\com\example\fortwo\client\model\Message.java
+* app\src\main\java\com\example\fortwo\client\model\User.java
+* app\src\main\java\com\fortwo\
+* app\src\main\java\com\fortwo\client\
+* app\src\main\java\com\fortwo\client\services\
+* app\src\main\java\com\fortwo\client\services\ChatService.java
+* app\src\main\java\com\fortwo\client\services\ChatServiceStub.java
+* app\src\main\java\com\fortwo\client\services\GetChatService.java
+* app\src\main\java\com\fortwo\client\services\IChatService.java
+* app\src\main\java\com\fortwo\client\services\IUserService.java
+* app\src\main\java\com\fortwo\client\services\RepeatableService.java
+* app\src\main\java\com\fortwo\client\services\UserService.java
+* app\src\main\java\com\fortwo\client\services\UserServiceStub.java
+* app\src\main\java\com\fortwo\client\services\WakefulRepeatableService.java
+* app\src\main\res\
+* app\src\main\res\drawable-hdpi\
+* app\src\main\res\drawable-hdpi\ic_launcher.png
+* app\src\main\res\drawable-ldpi\
+* app\src\main\res\drawable-ldpi\ic_launcher.png
+* app\src\main\res\drawable-mdpi\
+* app\src\main\res\drawable-mdpi\background2.png
+* app\src\main\res\drawable-mdpi\ic_launcher.png
+* app\src\main\res\drawable-xhdpi\
+* app\src\main\res\drawable-xhdpi\ic_launcher.png
+* app\src\main\res\drawable-xxhdpi\
+* app\src\main\res\drawable-xxhdpi\background.jpg
+* app\src\main\res\drawable-xxhdpi\background_tile.png
+* app\src\main\res\drawable-xxhdpi\bell.png
+* app\src\main\res\drawable-xxhdpi\box.png
+* app\src\main\res\drawable-xxhdpi\burger.png
+* app\src\main\res\drawable-xxhdpi\button.xml
+* app\src\main\res\drawable-xxhdpi\chat_background.xml
+* app\src\main\res\drawable-xxhdpi\chat_text.xml
+* app\src\main\res\drawable-xxhdpi\coverbackground.png
+* app\src\main\res\drawable-xxhdpi\custom_rectangle.xml
+* app\src\main\res\drawable-xxhdpi\daoyi.png
+* app\src\main\res\drawable-xxhdpi\dropmenu.png
+* app\src\main\res\drawable-xxhdpi\heart.png
+* app\src\main\res\drawable-xxhdpi\ic_launcher.png
+* app\src\main\res\drawable-xxhdpi\icon.png
+* app\src\main\res\drawable-xxhdpi\line.png
+* app\src\main\res\drawable-xxhdpi\logo.png
+* app\src\main\res\drawable-xxhdpi\logo_star.png
+* app\src\main\res\drawable-xxhdpi\menubar.png
+* app\src\main\res\drawable-xxhdpi\paperclip.png
+* app\src\main\res\drawable-xxhdpi\pen.png
+* app\src\main\res\drawable-xxhdpi\pieter.png
+* app\src\main\res\drawable-xxhdpi\profile.png
+* app\src\main\res\drawable-xxhdpi\textbox.png
+* app\src\main\res\layout\
+* app\src\main\res\layout\activity_basic_setup.xml
+* app\src\main\res\layout\activity_chat.xml
+* app\src\main\res\layout\activity_login.xml
+* app\src\main\res\menu\
+* app\src\main\res\menu\basic_setup.xml
+* app\src\main\res\menu\chat.xml
+* app\src\main\res\values-v11\
+* app\src\main\res\values-v11\styles.xml
+* app\src\main\res\values-v14\
+* app\src\main\res\values-v14\styles.xml
+* app\src\main\res\values-w820dp\
+* app\src\main\res\values-w820dp\dimens.xml
+* app\src\main\res\values\
+* app\src\main\res\values\color.xml
+* app\src\main\res\values\dimens.xml
+* app\src\main\res\values\strings.xml
+* app\src\main\res\values\strings_activity_basic_setup.xml
+* app\src\main\res\values\strings_activity_login.xml
+* app\src\main\res\values\styles.xml
+* build.gradle
+* gradle\
+* gradle\wrapper\
+* gradle\wrapper\gradle-wrapper.jar
+* gradle\wrapper\gradle-wrapper.properties
+* gradlew
+* gradlew.bat
+* ic_launcher-web.png
+* proguard-project.txt
+* settings.gradle
+* target\
+* target\classes\
+* target\classes\META-INF\
+* target\classes\META-INF\MANIFEST.MF
+* target\classes\META-INF\maven\
+* target\classes\META-INF\maven\ForTwo.Client\
+* target\classes\META-INF\maven\ForTwo.Client\ForTwo.Client\
+* target\classes\META-INF\maven\ForTwo.Client\ForTwo.Client\pom.properties
+* target\classes\META-INF\maven\ForTwo.Client\ForTwo.Client\pom.xml
+* target\classes\com\
+* target\classes\com\example\
+* target\classes\com\example\fortwo\
+* target\classes\com\example\fortwo\client\
+* target\classes\com\example\fortwo\client\BuildConfig.java
+* target\classes\com\example\fortwo\client\ChatActivity.class
+* target\classes\com\example\fortwo\client\R.java
+* target\classes\com\fortwo\
+* target\classes\com\fortwo\client\
+* target\classes\com\fortwo\client\services\
+* target\classes\com\fortwo\client\services\ChatService.class
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:19.1.0
+gson-2.2.2.jar => com.google.code.gson:gson:2.2.2
+
+Potentially Missing Dependency:
+-------------------------------
+When we replaced the following .jar files with a Gradle dependency, we
+inferred the dependency version number from the filename. This
+specific version may not actually be available from the repository.
+If you get a build error stating that the dependency is missing, edit
+the version number to for example "+" to pick up the latest version
+instead. (This may require you to update your code if the library APIs
+have changed.)
+
+gson-2.2.2.jar => version 2.2.2 in com.google.code.gson:gson:2.2.2
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+appcompat-v7 => [com.android.support:appcompat-v7:19.1.0]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* assets\ => app\src\main\assets\
+* libs\async-http-client-1.9.20.jar => app\libs\async-http-client-1.9.20.jar
+* libs\jackson-annotations-2.6.0.jar => app\libs\jackson-annotations-2.6.0.jar
+* libs\jackson-core-2.6.4.jar => app\libs\jackson-core-2.6.4.jar
+* libs\jackson-databind-2.6.4.jar => app\libs\jackson-databind-2.6.4.jar
+* libs\netty-3.10.1.Final.jar => app\libs\netty-3.10.1.Final.jar
+* libs\signalr-client-sdk-android.jar => app\libs\signalr-client-sdk-android.jar
+* libs\signalr-client-sdk.jar => app\libs\signalr-client-sdk.jar
+* libs\slf4j-api-1.7.7.jar => app\libs\slf4j-api-1.7.7.jar
+* libs\wasync-2.1.2.jar => app\libs\wasync-2.1.2.jar
+* lint.xml => app\lint.xml
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
