@@ -1,4 +1,4 @@
-package com.fortwo.client.services;
+package com.fortwo.client.interfaces;
 
 import com.example.fortwo.client.model.ChatLine;
 

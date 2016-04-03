@@ -1,8 +1,9 @@
 package com.fortwo.client.services;
 
 import com.example.fortwo.client.model.ChatLine;
+import com.fortwo.client.interfaces.IChatService;
 
-public class ChatServiceStub implements IChatService{
+public class ChatServiceStub implements IChatService {
 	
 	@Override
 	public ChatLine getChat() {

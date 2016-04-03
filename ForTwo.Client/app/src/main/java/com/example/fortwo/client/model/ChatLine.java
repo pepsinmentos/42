@@ -3,7 +3,7 @@ package com.example.fortwo.client.model;
 import java.util.Date;
 
 public class ChatLine {
-	private long ChatLineId;
+	private String ChatLineId;
 	private int SenderId;
 	private int RecipientId;
 	private String Message;	
@@ -12,13 +12,11 @@ public class ChatLine {
 	private Date CreatedOn;
 	
 	
-	public long getChatLineId() {
+	public String getChatLineId() {
 		return ChatLineId;
 	}
 
-	public void setChatLineId(long chatLineId) {
-		ChatLineId = chatLineId;
-	}
+	public void setChatLineId(String chatLineId) { ChatLineId = chatLineId; }
 
 	public int getSenderId() {
 		return SenderId;

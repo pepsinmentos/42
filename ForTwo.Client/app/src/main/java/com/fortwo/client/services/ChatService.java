@@ -33,13 +33,19 @@ public class ChatService {
 	HubProxy hub;
 	ChatReceivedListener chatReceivedListener;
 	private final int senderId;
+	//private final String serverHostName = "http://fourtwo.co.za/";
+	private final String serverHostName = "http://localhost:8080/";
 
 	public ChatService(final int senderId) {
 		this.senderId = senderId;
 		//Platform.loadPlatformComponent(new AndroidPlatformComponent());
 
-		String host = "http://fourtwo.co.za/signalr";
-		//String host = "http://localhost:8080/signalr";
+		ConnectToHub();
+
+	}
+
+	private void ConnectToHub(){
+		String host = serverHostName +  "signalr";
 		HubConnection connection = new HubConnection(host);
 		Log.d("PR", "Go connection");
 		try {
@@ -69,13 +75,13 @@ public class ChatService {
 		}
 
 		hub.subscribe(ChatService.this);
-
 	}
 
 	public List<ChatLine> getUnreadChatLines(){
         HttpURLConnection connection = null;
         try {
-            URL url = new URL("http://fourtwo.co.za/api/chat?userId=1");
+			String host = serverHostName + "api/chat?userId=1";
+            URL url = new URL(serverHostName);
             connection = (HttpURLConnection) url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputline;

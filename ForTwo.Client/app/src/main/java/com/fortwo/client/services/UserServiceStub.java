@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import com.example.fortwo.client.constants.LoggingConstants;
 import com.example.fortwo.client.model.User;
+import com.fortwo.client.interfaces.IUserService;
 
 import android.util.Log;
 

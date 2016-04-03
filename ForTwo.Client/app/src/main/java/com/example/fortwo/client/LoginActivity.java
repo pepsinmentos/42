@@ -2,7 +2,7 @@ package com.example.fortwo.client;
 
 import com.example.fortwo.client.constants.KeyValueConstants;
 import com.example.fortwo.client.constants.LoggingConstants;
-import com.fortwo.client.services.IUserService;
+import com.fortwo.client.interfaces.IUserService;
 import com.fortwo.client.services.UserServiceStub;
 
 import android.app.Activity;
