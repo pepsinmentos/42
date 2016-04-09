@@ -1,6 +1,7 @@
 package com.fortwo.client.services;
 
 import com.example.fortwo.client.ChatActivity;
+import com.example.fortwo.client.ForTwoApplication;
 import com.example.fortwo.client.R;
 import com.example.fortwo.client.constants.LoggingConstants;
 import com.example.fortwo.client.model.ChatLine;
@@ -18,10 +19,12 @@ import java.util.List;
 public class GetChatService extends WakefulRepeatableService {
 
 	ChatService chatService;
+	NotificationService notificationService;
 	
 	public GetChatService() {		
 		super("GetChatService");
-		
+		chatService = new ChatService(ForTwoApplication.getInstance(), new UserService(ForTwoApplication.getInstance()));
+		notificationService = new NotificationService(this);
 		Log.d(LoggingConstants.LOGGING_TAG, "GetChatService constructor called");
 	}
 	
@@ -38,29 +41,24 @@ public class GetChatService extends WakefulRepeatableService {
 
 	@Override
 	protected void executeBackgroundService(Intent intent) throws Exception {
-		List<ChatLine> chatLines = new ChatService(1).getUnreadChatLines();
-		if(chatLines != null)
+		List<ChatLine> chatLines = chatService.getUnreadChatLines();
+		Log.d(LoggingConstants.LOGGING_TAG, chatLines.toString() + " " + chatLines.size());
+		if(chatLines != null && chatLines.size() > 0)
 		{
 			Log.d(LoggingConstants.LOGGING_TAG, "Found chats. Building notification");
-			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-					.setSmallIcon(R.drawable.icon)
-					.setContentTitle("ForTwo")
-					.setContentText("Unread messages");
-
-			Intent resultIntent = new Intent(this, ChatActivity.class);
-
-			PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-			mBuilder.setContentIntent(resultPendingIntent);
-
-			NotificationManager mNotifyManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-			mNotifyManager.notify(001, mBuilder.build());
+			try {
+				notificationService.ChatsReceived(chatLines);
+			}catch (Exception ex) {
+				Log.e(LoggingConstants.LOGGING_TAG, ex.toString());
+				for(StackTraceElement ste: ex.getStackTrace())
+				Log.e(LoggingConstants.LOGGING_TAG, ste.toString());
+			}
 		}
-		Log.d(LoggingConstants.LOGGING_TAG, "I AM GETTING MESSAGES");
 	}
 	
 	@Override
 	protected long getRepeatingInterval(){
-		return 15000;
+		return 30000;
 	}
 	
 	protected Intent getServiceIntent(Context context){

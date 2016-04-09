@@ -10,8 +10,12 @@ public class ChatLine {
 	private int Status;
 	private Date SentOn;
 	private Date CreatedOn;
-	
-	
+	private int ID;
+
+	public int getID() { return ID; }
+
+	public void setID(int val) { ID = val; }
+
 	public String getChatLineId() {
 		return ChatLineId;
 	}

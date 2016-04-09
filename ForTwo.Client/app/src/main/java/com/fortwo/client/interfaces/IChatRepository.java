@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface IChatRepository {
     ChatLine saveChatLine(ChatLine chatLine);
-    List<ChatLine> getChatLinesPaged(int pageSize, int pageIndex);
+    List<ChatLine> getChatLines(int lastChatId);
 }

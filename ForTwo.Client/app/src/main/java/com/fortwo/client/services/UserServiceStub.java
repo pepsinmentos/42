@@ -30,4 +30,24 @@ public class UserServiceStub implements IUserService {
 		return new User();
 	}
 
+	@Override
+	public int getSenderId() {
+		return 2;
+	}
+
+	@Override
+	public int getRecipientId() {
+		return 1;
+	}
+
+	@Override
+	public int setSenderId(int senderId) {
+		return getSenderId();
+	}
+
+	@Override
+	public int setRecipientId(int recipientId) {
+		return getRecipientId();
+	}
+
 }

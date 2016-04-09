@@ -1,5 +1,7 @@
 package com.fortwo.client.services;
 
+import android.content.Context;
+
 import com.example.fortwo.client.model.ChatLine;
 import com.fortwo.client.services.ChatService;
 
@@ -22,7 +24,7 @@ public class ChatServiceTest extends TestCase {
     }
 
     public void testGetUnreadChatLines() throws Exception {
-        ChatService service = new ChatService(1);
+        ChatService service = new ChatService(null, new UserServiceStub());
         List<ChatLine> c = service.getUnreadChatLines();
 
         for (ChatLine chatLine : c ) {

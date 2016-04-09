@@ -21,15 +21,19 @@ android {
     }
 }
 
+
+
 dependencies {
     compile 'com.android.support:appcompat-v7:19.1.0'
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.code.gson:gson:2.2.2'
     compile files('libs/async-http-client-1.9.20.jar')
     compile files('libs/netty-3.10.1.Final.jar')
-    compile files('libs/signalr-client-sdk-android.jar')
+    //compile files('libs/signalr-client-sdk-android.jar')
+    // compile 'signalr-client-sdk-android-release@aar'
     compile files('libs/signalr-client-sdk.jar')
     compile files('libs/slf4j-api-1.7.7.jar')
     compile files('libs/wasync-2.1.2.jar')
     testCompile 'junit:junit:4.12'
+    compile project(':signalr-client-sdk-android-release')
 }

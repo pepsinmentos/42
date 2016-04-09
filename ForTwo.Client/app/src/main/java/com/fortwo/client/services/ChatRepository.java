@@ -18,6 +18,7 @@ public abstract class ChatRepository implements IChatRepository {
     protected static final String COLUMN_NAME_STATUS = "status";
     protected static final String COLUMN_NAME_SENT_ON = "sentOn";
     protected static final String COLUMN_NAME_CREATED_ON = "createdOn";
+    protected static final String COLUMN_NAME_ID = "ID";
 
     public ChatRepository()
     {
@@ -28,6 +29,6 @@ public abstract class ChatRepository implements IChatRepository {
     public abstract ChatLine saveChatLine(ChatLine chatLine) ;
 
     @Override
-    public abstract List<ChatLine> getChatLinesPaged(int pageSize, int pageIndex);
+    public abstract List<ChatLine> getChatLines(int lastChatId);
 
 }
