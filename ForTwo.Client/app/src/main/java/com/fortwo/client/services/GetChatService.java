@@ -24,7 +24,7 @@ public class GetChatService extends WakefulRepeatableService {
 	public GetChatService() {		
 		super("GetChatService");
 		chatService = new ChatService(ForTwoApplication.getInstance(), new UserService(ForTwoApplication.getInstance()));
-		notificationService = new NotificationService(this);
+		notificationService = ForTwoApplication.getNotificationService();
 		Log.d(LoggingConstants.LOGGING_TAG, "GetChatService constructor called");
 	}
 	

@@ -103,11 +103,19 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         userService = new UserService(this);
         chatService = new ChatService(ChatActivity.this, userService);
-        notificationService = new NotificationService(this);
+        notificationService = ForTwoApplication.getNotificationService();
         setContentView(R.layout.activity_chat);
 
         setChatButtonHandler();
         setChatTextInput();
+
+        SharedPreferences sharedPrefs = getSharedPreferences(KeyValueConstants.SharedPreferencesName, MODE_PRIVATE);
+        boolean isFirstRun = sharedPrefs.getBoolean(KeyValueConstants.IsFirstRun, true);
+        if(isFirstRun) {
+            sharedPrefs.edit().putBoolean(KeyValueConstants.IsFirstRun, false).commit();
+            Log.d(LoggingConstants.LOGGING_TAG, "First run. Scheduling services");
+            ForTwoApplication.getInstance().scheduleServices();
+        }
     }
 
     private void loadChatLines(){
