@@ -42,6 +42,7 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
     protected void onStart() {
         super.onStart();
         Log.i(LoggingConstants.LOGGING_TAG, "OnStart called");
+        notificationService.clearNotificationList();
 
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -54,6 +55,7 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 loadChatLines();
+                scrollToLastChat();
             }
         }.execute();
 
@@ -123,12 +125,20 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
             @Override
             protected void onPostExecute(List<ChatLine> chatHistory) {
                 super.onPostExecute(chatHistory);
+                int lastSenderId = 0;
                 for (int i = chatHistory.size() - 1; i >= 0; i--)
                 {
                     ChatLine c = chatHistory.get(i);
-                    addChatLine(c.getID() + ": " + c.getMessage());
+                    String message = "";
+                    if(lastSenderId != c.getSenderId()) {
+                        message = userService.getUserName(c.getSenderId()) + ":\n";
+                        lastSenderId = c.getSenderId();
+                    }
+                    message += c.getMessage();
+                    addChatLine(message);
                     lastChatId = c.getID();
                 }
+                scrollToLastChat();
             }
 
             @Override
@@ -143,6 +153,9 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
 
             @Override
             public void onClick(View arg0) {
+
+
+
                 EditText chatTextInput = (EditText) findViewById(R.id.chat_text_input);
                 String chatMessage = chatTextInput.getText().toString();
 
@@ -152,6 +165,7 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
                // addChatLine(chatMessage);
 
                 chatTextInput.getText().clear();
+
             }
         });
 
@@ -166,15 +180,13 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
 
     private void addChatLine(String chatMessage) {
         try {
-
-            ScrollView scrollView = (ScrollView) findViewById(R.id.chat_view);
             View linearLayout = findViewById(R.id.chat_container);
             Typeface tf = Typeface.createFromAsset(getAssets(), "DaoType.ttf");
 
             TextView valueTV = new TextView(ChatActivity.this);
             // valueTV.setBackgroundResource(R.drawable.chat_text);
             valueTV.setTextAppearance(this, R.style.chat_text_style);
-            valueTV.setPadding(60, 10, 10, 10);
+            valueTV.setPadding(10, 10, 10, 10);
             valueTV.setTypeface(tf);
             valueTV.setTextSize(20);
 
@@ -184,12 +196,21 @@ public class ChatActivity extends Activity implements ChatReceivedListener {
             valueTV.setId(rand.nextInt());
 
             ((LinearLayout) linearLayout).addView(valueTV);
-
-            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-
         } catch (Exception e) {
             Log.e("PR", e.toString());
         }
+    }
+
+    private void scrollToLastChat() {
+        ScrollView scrollView = (ScrollView) findViewById(R.id.chat_view);
+        scrollView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ScrollView scrollView = (ScrollView) findViewById(R.id.chat_view);
+                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        }, 100);
+
     }
 
 

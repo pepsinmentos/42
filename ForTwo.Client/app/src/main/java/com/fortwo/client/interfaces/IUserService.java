@@ -8,4 +8,5 @@ public interface IUserService {
 	int getRecipientId();
 	int setSenderId(int senderId);
 	int setRecipientId(int recipientId);
+	String getUserName(int userId);
 }

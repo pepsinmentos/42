@@ -76,6 +76,12 @@ public class UserService implements IUserService {
 			return new User("Pieter Roodt", email, 1);
 		}
 
+		if(Objects.equals(email, "test@gmail.com"))
+		{
+			Log.d(LoggingConstants.LOGGING_TAG, "Returning Tester p");
+			return new User("Tester McTest", email, 3);
+		}
+
 		if(Objects.equals(email, "ldaoyi@gmail.com"))
 		{
 			Log.d(LoggingConstants.LOGGING_TAG, "Returning Daoyi");
@@ -120,6 +126,16 @@ public class UserService implements IUserService {
 		editor.putInt(KeyValueConstants.PartnerUserIdKey, recipientId);
 		editor.commit();
 		return getRecipientId();
+	}
+
+	@Override
+	public String getUserName(int userId) {
+		if(userId == 1)
+			return "Pieter";
+		if(userId == 2)
+			return "Daoyi";
+
+		return "Unknown";
 	}
 
 }

@@ -54,10 +54,16 @@ public class NotificationService implements ChatReceivedListener {
 
         Intent resultIntent = new Intent(context, ChatActivity.class);
 
+
+
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
 
         NotificationManager mNotifyManager = (NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
         mNotifyManager.notify(notificationId, mBuilder.build());
+    }
+
+    public void clearNotificationList(){
+        chatLines.clear();
     }
 }

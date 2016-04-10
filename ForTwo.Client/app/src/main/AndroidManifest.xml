@@ -38,7 +38,8 @@
 
         <activity
             android:name=".ChatActivity"
-            android:label="@string/title_activity_chat" >
+            android:label="@string/title_activity_chat"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".LoginActivity"

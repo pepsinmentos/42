@@ -17,7 +17,7 @@
         <ScrollView
             android:id="@+id/chat_view"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="450dp" >
 
             <LinearLayout
                 android:id="@+id/chat_container"
@@ -25,9 +25,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/chat_background"
                 android:gravity="top"
-                android:minHeight="600dp"
+                android:minHeight="450dp"
                 android:orientation="vertical"
-                android:paddingBottom="100dp"
+                android:paddingBottom="10dp"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
                 android:paddingTop="100dp"
@@ -78,7 +78,7 @@
         <RelativeLayout
             android:id="@+id/input_bar"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true" >
 

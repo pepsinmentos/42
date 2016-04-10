@@ -50,4 +50,14 @@ public class UserServiceStub implements IUserService {
 		return getRecipientId();
 	}
 
+	@Override
+	public String getUserName(int userId) {
+		if(userId == 1)
+			return "Pieter";
+		if(userId == 2)
+			return "Daoyi";
+
+		return "Unknown";
+	}
+
 }
